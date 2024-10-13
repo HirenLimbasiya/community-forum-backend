@@ -30,6 +30,10 @@ func main() {
 	if mongoURI == "" {
 		log.Fatal("MONGO_URI environment variable is not set")
 	}
+	// frontendURI := os.Getenv("FRONTEND_URI")
+	// if mongoURI == "" {
+	// 	log.Fatal("FRONTEND_URI environment variable is not set")
+	// }
 	
 	// MongoDB setup
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -50,7 +54,7 @@ func main() {
 	app := fiber.New()
 
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "http://localhost:3001",
+		AllowOrigins: "*",
 		AllowMethods: "GET,POST,PUT,DELETE, PATCH",
 		AllowHeaders: "Origin, Content-Type, Accept, Authorization", // Include Authorization header
 	}))
